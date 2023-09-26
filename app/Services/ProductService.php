@@ -24,13 +24,21 @@ class ProductService
     }
     public function store($data)
     {
+        foreach ($data as $key_field => $field_validation) {
+            foreach ($field_validation as $key => $field) {
+                if ($field == 'unique') {
+                    $data[$key_field][$key] = 'unique:' . ProductRepositories::DB_TABLE;
+                }
+            }
+        }
+        dd($data);
         $validator = Validator::make($data, $data);
 
         if ($validator->fails()) {
             throw new InvalidArgumentException($validator->errors()->first());
+        } else {
+            return $this->repository->save($data);
         }
-
-        return $this->repository->save($data);
     }
 
     public function update($data, $id)

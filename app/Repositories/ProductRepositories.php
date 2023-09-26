@@ -18,13 +18,6 @@ class ProductRepositories
     {
         $data = $this->model::orderBy('nama')->where('status', 1)->get()->map(function ($data) {
             return $this->format($data);
-            // return [
-            //     'id'    => $data->id,
-            //     'nama_produk'  => $data->nama,
-            //     'harga_produk'  => $data->harga,
-            //     'status'  => $data->status == 1 ? 'Aktif' : 'Inaktif',
-            //     'kategori'  => $data->category->nama,
-            // ];
         });
 
         return $data;
