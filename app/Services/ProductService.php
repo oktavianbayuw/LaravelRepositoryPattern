@@ -31,14 +31,10 @@ class ProductService
                 }
             }
         }
-        dd($data);
-        $validator = Validator::make($data, $data);
 
-        if ($validator->fails()) {
-            throw new InvalidArgumentException($validator->errors()->first());
-        } else {
-            return $this->repository->save($data);
-        }
+        request()->validate($data);
+
+        return $this->repository->save($data);
     }
 
     public function update($data, $id)
@@ -52,11 +48,12 @@ class ProductService
             }
         }
 
-        $validator = Validator::make($data, $data);
+        // $validator = Validator::make($data, $data);
 
-        if ($validator->fails()) {
-            throw new InvalidArgumentException($validator->errors()->first());
-        }
+        // if ($validator->fails()) {
+        //     throw new InvalidArgumentException($validator->errors()->first());
+        // }
+        request()->validate($data);
 
         return $this->repository->update($data, $id);
     }
