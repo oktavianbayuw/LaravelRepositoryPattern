@@ -19,9 +19,9 @@ class ProductFactory extends Factory
         return [
             //
             'nama'  => $this->faker->name(),
-            'harga'  => 20000,
-            'stok'  => 100,
-            'status'  => 1,
+            'harga'  => 'Rp. ' . $this->faker->randomElement([1000, 100000]),
+            'stok'  => $this->faker->randomElement([20, 100]),
+            'status'  => $this->faker->randomElement([0, 1]),
             'id_kategori'  => $this->faker->randomElement([1, 9])
         ];
     }
